@@ -7,7 +7,7 @@ def main(**kwargs):
     args.__dict__.update(kwargs)
 
     model = ToreNet(args)
-    model.to("cuda")
+    model.to(args.device)
 
     dataset = BucketDataset(im_reshape=(args.im_size,args.im_size))
     train_dataset, val_dataset = torch.utils.data.random_split(dataset, [int(0.8*len(dataset)), len(dataset)-int(0.8*len(dataset))])

@@ -244,7 +244,7 @@ class ToreNet(torch.nn.Module):
                                                     torch.nn.SiLU(),
                                                     torch.nn.Linear(args.encoder_hid_dim, args.encoder_hid_dim)])
     def forward(self, image, features):
-        dummy_timesteps = torch.tensor(0).long().cuda() #added simply because this library is made for diffusion models and we dont want to rewrite their code
+        dummy_timesteps = torch.tensor(0).long().to(self.args.device) #added simply because this library is made for diffusion models and we dont want to rewrite their code
         if self.args.conditioning_mode == "concat":
             features = torch.nn.functional.interpolate(features, size=(image.shape[2],image.shape[3]), mode="area")
             x = torch.concat([image, features], dim=1)
